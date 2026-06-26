@@ -3,10 +3,280 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>GymEats - Kenyan Gym Nutrition Tracker</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <header>
+      <div class="header-content">
+        <div class="logo">
+          <span class="logo-icon">💪</span>
+          <div>
+            <h1>GymEats</h1>
+            <p>Kenyan Gym Nutrition Tracker</p>
+          </div>
+        </div>
+        <div class="header-right">
+          <div class="date-display" id="dateDisplay"></div>
+          <button class="settings-btn" onclick="openGoalSetup()">
+            ⚙️ Goals
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Goal Setup Modal -->
+    <div
+      class="modal-overlay"
+      id="modalOverlay"
+      onclick="handleOverlayClick(event)"
+    >
+      <div class="modal">
+        <h2>⚙️ Set Your Goals</h2>
+        <p class="modal-subtitle">
+          We'll calculate your daily macro targets automatically
+        </p>
+
+        <div class="input-group">
+          <label>Your Body Weight (kg)</label>
+          <input
+            type="number"
+            id="goalWeight"
+            placeholder="e.g. 80"
+            min="30"
+            max="200"
+          />
+        </div>
+
+        <div class="input-group">
+          <label>Fitness Goal</label>
+          <div class="goal-options">
+            <button
+              class="goal-btn"
+              data-goal="cut"
+              onclick="selectGoal('cut')"
+            >
+              <span>🔥</span> Cut
+              <small>Lose fat, keep muscle</small>
+            </button>
+            <button
+              class="goal-btn active"
+              data-goal="maintain"
+              onclick="selectGoal('maintain')"
+            >
+              <span>⚖️</span> Maintain
+              <small>Stay at current weight</small>
+            </button>
+            <button
+              class="goal-btn"
+              data-goal="bulk"
+              onclick="selectGoal('bulk')"
+            >
+              <span>💪</span> Bulk
+              <small>Build muscle & size</small>
+            </button>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label>Activity Level</label>
+          <select id="goalActivity">
+            <option value="1.2">Sedentary (little or no exercise)</option>
+            <option value="1.375">Lightly Active (1–3 days/week)</option>
+            <option value="1.55" selected>
+              Moderately Active (3–5 days/week)
+            </option>
+            <option value="1.725">Very Active (6–7 days/week)</option>
+          </select>
+        </div>
+
+        <button class="save-goals-btn" onclick="saveGoals()">
+          💾 Save My Goals
+        </button>
+      </div>
+    </div>
+
+    <main>
+      <!-- Setup Notice -->
+      <div class="setup-notice" id="setupNotice">
+        <p>
+          👋 Welcome to GymEats!
+          <button onclick="openGoalSetup()">Set your goals</button> to unlock
+          your daily macro targets.
+        </p>
+      </div>
+
+      <!-- Daily Progress -->
+      <section
+        class="progress-section card"
+        id="progressSection"
+        style="display: none"
+      >
+        <div class="progress-header">
+          <h2>Daily Progress</h2>
+          <div class="goal-badge" id="goalBadge">Maintain</div>
+        </div>
+
+        <!-- Protein Spotlight -->
+        <div class="protein-spotlight">
+          <div class="protein-info">
+            <span class="protein-label">💪 Protein — Your #1 Priority</span>
+            <span class="protein-numbers" id="proteinNumbers">0 / 0g</span>
+          </div>
+          <div class="progress-bar-wrap">
+            <div
+              class="progress-bar protein-bar"
+              id="proteinBar"
+              style="width: 0%"
+            ></div>
+          </div>
+          <span class="protein-remaining" id="proteinRemaining"
+            >0g remaining</span
+          >
+        </div>
+
+        <!-- Other Macros -->
+        <div class="macros-grid">
+          <div class="macro-item">
+            <div class="macro-top">
+              <span class="macro-name calories-text">🔥 Calories</span>
+              <span class="macro-numbers" id="calNumbers">0 / 0</span>
+            </div>
+            <div class="progress-bar-wrap">
+              <div
+                class="progress-bar calories-bar"
+                id="calBar"
+                style="width: 0%"
+              ></div>
+            </div>
+            <span class="macro-remaining" id="calRemaining">0 remaining</span>
+          </div>
+
+          <div class="macro-item">
+            <div class="macro-top">
+              <span class="macro-name carbs-text">🍚 Carbs</span>
+              <span class="macro-numbers" id="carbNumbers">0 / 0g</span>
+            </div>
+            <div class="progress-bar-wrap">
+              <div
+                class="progress-bar carbs-bar"
+                id="carbBar"
+                style="width: 0%"
+              ></div>
+            </div>
+            <span class="macro-remaining" id="carbRemaining">0g remaining</span>
+          </div>
+
+          <div class="macro-item">
+            <div class="macro-top">
+              <span class="macro-name fat-text">🥑 Fat</span>
+              <span class="macro-numbers" id="fatNumbers">0 / 0g</span>
+            </div>
+            <div class="progress-bar-wrap">
+              <div
+                class="progress-bar fat-bar"
+                id="fatBar"
+                style="width: 0%"
+              ></div>
+            </div>
+            <span class="macro-remaining" id="fatRemaining">0g remaining</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Add Food -->
+      <section class="search-section card">
+        <h2>🍽️ Add Food</h2>
+        <div class="search-row">
+        <div class="input-group search-input-wrap">
+          <label>Search Kenyan Food</label>
+          <input
+            type="text"
+            id="foodSearch"
+            placeholder="e.g. Eggs, Chicken, Ugali..."
+            autocomplete="off"
+          />
+          <div class="dropdown" id="dropdown"></div>
+        </div>
+        <div class="input-group grams-wrap">
+          <label>Amount</label>
+          <div class="amount-input-row">
+            <input
+              type="number"
+              id="servingSize"
+              placeholder="e.g. 200"
+              min="1"
+            />
+            <select id="servingUnit" onchange="handleUnitChange()">
+              <option value="g">grams (g)</option>
+            </select>
+          </div>
+          <small class="gram-hint" id="gramHint"></small>
+        </div>
+        <div class="input-group">
+          <label>Meal</label>
+          <select id="mealTime">
+            <option value="Breakfast">🌅 Breakfast</option>
+            <option value="Pre-Workout">⚡ Pre-Workout</option>
+            <option value="Post-Workout">💪 Post-Workout</option>
+            <option value="Lunch">☀️ Lunch</option>
+            <option value="Dinner">🌙 Dinner</option>
+            <option value="Snack">🍎 Snack</option>
+          </select>
+        </div>
+        <button id="addBtn" onclick="addFood()">+ Add to Today's Log</button>
+      </section>
+
+      <!-- Nutrient Preview -->
+      <section
+        class="nutrient-preview card"
+        id="nutrientPreview"
+        style="display: none"
+      >
+        <h2>Preview <span id="previewFoodName"></span></h2>
+        <p class="serving-note" id="servingNote"></p>
+        <div class="nutrient-grid">
+          <div class="nutrient-box calories">
+            <span class="nutrient-value" id="previewCalories">0</span>
+            <span class="nutrient-label">Calories</span>
+          </div>
+          <div class="nutrient-box protein">
+            <span class="nutrient-value" id="previewProtein">0g</span>
+            <span class="nutrient-label">Protein</span>
+          </div>
+          <div class="nutrient-box carbs">
+            <span class="nutrient-value" id="previewCarbs">0g</span>
+            <span class="nutrient-label">Carbs</span>
+          </div>
+          <div class="nutrient-box fat">
+            <span class="nutrient-value" id="previewFat">0g</span>
+            <span class="nutrient-label">Fat</span>
+          </div>
+          <div class="nutrient-box fiber">
+            <span class="nutrient-value" id="previewFiber">0g</span>
+            <span class="nutrient-label">Fiber</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Daily Log -->
+      <section class="daily-log card">
+        <div class="log-header">
+          <h2>📋 Today's Log</h2>
+          <button class="clear-btn" onclick="clearLog()">Clear All</button>
+        </div>
+        <div id="logList">
+          <p class="empty-log">
+            No foods logged yet — search above to get started! 💪
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>GymEats — Built for Kenyan gym warriors 💪</p>
+    </footer>
+
     <script src="script.js"></script>
   </body>
 </html>
