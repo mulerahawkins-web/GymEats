@@ -248,11 +248,26 @@ let selectedGoalType = "maintain";
 // INIT
 // ==============================
 document.addEventListener("DOMContentLoaded", () => {
-  const now = new Date();
-  document.getElementById("dateDisplay").textContent = now.toLocaleDateString(
-    "en-KE",
-    { weekday: "short", month: "short", day: "numeric" },
-  );
+  function updateClock() {
+    const now = new Date();
+
+    const date = now.toLocaleDateString("en-KE", {
+      weekday: "short",
+      month: "short",
+      day: "numeric",
+    });
+
+    const time = now.toLocaleTimeString("en-KE", {
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    });
+
+    document.getElementById("dateDisplay").textContent = `${date} · ${time}`;
+  }
+
+  updateClock();
+  setInterval(updateClock, 1000);
 
   document.getElementById("foodSearch").addEventListener("input", handleSearch);
   document
