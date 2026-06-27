@@ -14,6 +14,8 @@
   --border: #e5e7eb;
   --shadow: 0 2px 16px rgba(0, 0, 0, 0.07);
   --radius: 14px;
+  --heading: #0d2137;
+  --label: #6b7280;
   --cal-color: #ff4757;
   --protein-color: #00c896;
   --carbs-color: #ffa502;
@@ -272,11 +274,18 @@ main {
 .card h2 {
   font-size: 1rem;
   font-weight: 700;
-  color: var(--primary);
+  color: var(--heading);
   margin-bottom: 16px;
 }
 
 /* ===== PROGRESS ===== */
+.p.card h2rogress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
 .progress-header {
   display: flex;
   justify-content: space-between;
@@ -286,8 +295,8 @@ main {
 
 .progress-header h2 {
   margin-bottom: 0;
+  color: var(--heading);
 }
-
 .goal-badge {
   background: var(--accent);
   color: var(--primary);
@@ -295,6 +304,18 @@ main {
   border-radius: 20px;
   font-size: 0.75rem;
   font-weight: 700;
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.progress-header h2 {
+  margin-bottom: 0;
+  color: var(--heading);
 }
 
 /* Protein Spotlight */
@@ -382,10 +403,11 @@ main {
 .macro-name {
   font-size: 0.8rem;
   font-weight: 700;
+  color: var(--text);
 }
 .macro-numbers {
   font-size: 0.72rem;
-  color: var(--text-light);
+  color: var(--label);
 }
 
 .macro-item .progress-bar-wrap {
@@ -457,7 +479,7 @@ main {
 .input-group label {
   font-size: 0.75rem;
   font-weight: 700;
-  color: var(--text-light);
+  color: var(--label);
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -625,6 +647,9 @@ main {
 .log-header h2 {
   margin-bottom: 0;
 }
+.log-header h2 {
+  color: var(--heading);
+}
 
 .clear-btn {
   background: none;
@@ -660,14 +685,13 @@ main {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.8px;
-  color: var(--text-light);
+  color: var(--label);
   padding-bottom: 7px;
   border-bottom: 1px solid var(--border);
   margin-bottom: 6px;
   display: flex;
   justify-content: space-between;
 }
-
 .meal-kcal {
   color: var(--cal-color);
 }
@@ -691,11 +715,11 @@ main {
 .log-item-name {
   font-weight: 600;
   font-size: 0.88rem;
+  color: var(--text);
 }
-
 .log-item-details {
   font-size: 0.74rem;
-  color: var(--text-light);
+  color: var(--label);
   margin-top: 2px;
 }
 
@@ -709,7 +733,6 @@ main {
   align-items: center;
   gap: 8px;
 }
-
 .log-item-calories {
   font-weight: 700;
   color: var(--cal-color);
@@ -814,8 +837,9 @@ footer {
   --text-light: #94a3b8;
   --border: #1e293b;
   --shadow: 0 2px 16px rgba(0, 0, 0, 0.4);
+  --heading: #f1f5f9;
+  --label: #94a3b8;
 }
-
 [data-theme="dark"] header {
   background: #060d18;
 }
