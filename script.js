@@ -281,6 +281,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   loadFromStorage();
+  loadSavedTheme();
 
   if (!userGoals) openGoalSetup();
 });
@@ -694,4 +695,30 @@ function updateProgressUI(calories = 0, protein = 0, carbs = 0, fat = 0) {
   const fatLeft = Math.max(0, t.fat - fat);
   document.getElementById("fatRemaining").textContent =
     fatLeft > 0 ? `${fatLeft.toFixed(1)}g remaining` : "✅ Done";
+}
+// ==============================
+// DARK MODE
+// ==============================
+
+function toggleDarkMode() {
+  // Check what theme is currently active
+  const currentTheme = document.documentElement.getAttribute("data-theme");
+
+  if (currentTheme === "dark") {
+    // Switch to light mode
+    document.documentElement.removeAttribute("data-theme");
+    localStorage.setItem("gymEatsTheme", "light");
+  } else {
+    // Switch to dark mode
+    document.documentElement.setAttribute("data-theme", "dark");
+    localStorage.setItem("gymEatsTheme", "dark");
+  }
+}
+
+function loadSavedTheme() {
+  const savedTheme = localStorage.getItem("gymEatsTheme");
+
+  if (savedTheme === "dark") {
+    document.documentElement.setAttribute("data-theme", "dark");
+  }
 }
