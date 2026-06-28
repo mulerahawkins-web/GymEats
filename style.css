@@ -803,31 +803,200 @@ footer {
   display: block;
   min-height: 14px;
 }
-@media (max-width: 600px) {
-  .header-content {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
+@media (max-width: 768px) {
+  /* ── Header ── */
+  header {
+    padding: 12px 16px;
   }
+
+  .header-content {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .logo-icon {
+    font-size: 1.5rem;
+  }
+  .logo h1 {
+    font-size: 1.2rem;
+  }
+  .logo p {
+    display: none;
+  }
+
+  .header-right {
+    gap: 6px;
+  }
+
+  .date-display {
+    display: none;
+  }
+
+  .settings-btn {
+    padding: 6px 10px;
+    font-size: 0.75rem;
+  }
+
+  .theme-switch {
+    width: 44px;
+    height: 24px;
+  }
+
+  .switch-thumb {
+    width: 17px;
+    height: 17px;
+  }
+
+  [data-theme="dark"] .switch-thumb {
+    transform: translateX(20px);
+  }
+
+  /* ── Main Layout ── */
   main {
     padding: 0 12px;
-    margin: 16px auto;
+    margin: 14px auto;
+    gap: 12px;
   }
+
+  /* ── Cards ── */
+  .card {
+    padding: 16px;
+  }
+
+  /* ── Progress Section ── */
+  .protein-spotlight {
+    padding: 14px 16px;
+  }
+
+  .protein-label {
+    font-size: 0.82rem;
+  }
+  .protein-numbers {
+    font-size: 0.95rem;
+  }
+
+  .macros-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .macro-item {
+    padding: 12px;
+  }
+
+  /* ── Search & Add Food ── */
   .search-row {
     flex-direction: column;
+    gap: 4px;
   }
+
+  .search-input-wrap,
   .grams-wrap {
     width: 100%;
   }
+
+  .amount-input-row select {
+    width: 100%;
+  }
+
+  .input-group input,
+  .input-group select {
+    padding: 13px 14px;
+    font-size: 1rem;
+  }
+
+  #addBtn {
+    padding: 15px;
+    font-size: 1rem;
+  }
+
+  /* ── Nutrient Preview ── */
   .nutrient-grid {
     grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
   }
-  .macros-grid {
-    grid-template-columns: 1fr;
+
+  .nutrient-box {
+    padding: 12px 6px;
   }
+  .nutrient-value {
+    font-size: 1.1rem;
+  }
+  .nutrient-label {
+    font-size: 0.65rem;
+  }
+
+  /* ── Daily Log ── */
+  .log-item {
+    padding: 12px 0;
+  }
+
+  .log-item-name {
+    font-size: 0.85rem;
+  }
+  .log-item-details {
+    font-size: 0.72rem;
+  }
+
+  .log-item-calories {
+    font-size: 0.82rem;
+  }
+
+  .remove-btn {
+    padding: 6px 8px;
+    font-size: 1rem;
+  }
+
+  /* ── Modal ── */
+  .modal {
+    padding: 20px 16px;
+    max-width: 100%;
+  }
+
   .goal-options {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
   }
+
+  .goal-btn {
+    padding: 12px 6px;
+    font-size: 0.8rem;
+  }
+
+  .goal-btn small {
+    font-size: 0.62rem;
+  }
+
+  .save-goals-btn {
+    padding: 15px;
+    font-size: 1rem;
+  }
+
+  /* ── Footer ── */
+  footer {
+    padding: 14px;
+    font-size: 0.72rem;
+  }
+}
+
+/* ── Extra Small Screens (older/smaller phones) ── */
+@media (max-width: 380px) {
+  .logo h1 {
+    font-size: 1rem;
+  }
+}
+.nutrient-grid {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.goal-options {
+  grid-template-columns: 1fr;
+}
+
+.settings-btn span {
+  display: none;
 }
 /* ===== DARK MODE ===== */
 [data-theme="dark"] {
