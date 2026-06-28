@@ -6,74 +6,348 @@
 // FOOD DATABASE (per 100g)
 // ==============================
 const kenyanFoods = [
-  // HIGH PROTEIN — Gym Priority
+  // ==============================
+  // 🥚 EGGS — Multiple Preparations
+  // ==============================
   {
-    name: "Eggs (Boiled)",
-    category: "🥚 Protein",
+    name: "Eggs — Raw (Whole)",
+    category: "🥚 Eggs",
+    per100g: { calories: 134, protein: 12.7, carbs: 2.4, fat: 8.1, fiber: 0 },
+  },
+  {
+    name: "Eggs — Boiled",
+    category: "🥚 Eggs",
     per100g: { calories: 155, protein: 13, carbs: 1.1, fat: 11, fiber: 0 },
   },
   {
-    name: "Chicken Breast (Grilled)",
-    category: "🍗 Protein",
+    name: "Eggs — Fried (in oil)",
+    category: "🥚 Eggs",
+    per100g: { calories: 196, protein: 13.6, carbs: 0.8, fat: 14.8, fiber: 0 },
+  },
+  {
+    name: "Eggs — Scrambled (with milk)",
+    category: "🥚 Eggs",
+    per100g: { calories: 166, protein: 10.6, carbs: 2.1, fat: 12.2, fiber: 0 },
+  },
+  {
+    name: "Eggs — Omelette (plain)",
+    category: "🥚 Eggs",
+    per100g: { calories: 154, protein: 10.6, carbs: 0.5, fat: 12, fiber: 0 },
+  },
+  {
+    name: "Egg Whites Only",
+    category: "🥚 Eggs",
+    per100g: { calories: 52, protein: 11, carbs: 0.7, fat: 0.2, fiber: 0 },
+  },
+  {
+    name: "Egg Yolk Only",
+    category: "🥚 Eggs",
+    per100g: { calories: 322, protein: 15.9, carbs: 3.6, fat: 26.5, fiber: 0 },
+  },
+
+  // ==============================
+  // 🍗 CHICKEN — Multiple Preparations
+  // ==============================
+  {
+    name: "Chicken Breast — Grilled",
+    category: "🍗 Chicken",
     per100g: { calories: 165, protein: 31, carbs: 0, fat: 3.6, fiber: 0 },
   },
   {
-    name: "Kuku wa Kienyeji",
-    category: "🍗 Protein",
+    name: "Chicken Breast — Boiled",
+    category: "🍗 Chicken",
+    per100g: { calories: 150, protein: 29, carbs: 0, fat: 3, fiber: 0 },
+  },
+  {
+    name: "Chicken Breast — Fried",
+    category: "🍗 Chicken",
+    per100g: { calories: 219, protein: 25, carbs: 7.8, fat: 9.6, fiber: 0.3 },
+  },
+  {
+    name: "Chicken Leg — Grilled",
+    category: "🍗 Chicken",
+    per100g: { calories: 195, protein: 26, carbs: 0, fat: 9.7, fiber: 0 },
+  },
+  {
+    name: "Chicken Wings — Grilled",
+    category: "🍗 Chicken",
+    per100g: { calories: 203, protein: 24, carbs: 0, fat: 11.5, fiber: 0 },
+  },
+  {
+    name: "Kuku wa Kienyeji — Boiled",
+    category: "🍗 Chicken",
     per100g: { calories: 185, protein: 28, carbs: 0, fat: 7.5, fiber: 0 },
   },
   {
-    name: "Tilapia (Grilled)",
-    category: "🐟 Protein",
-    per100g: { calories: 128, protein: 26, carbs: 0, fat: 2.7, fiber: 0 },
+    name: "Kuku wa Kienyeji — Grilled",
+    category: "🍗 Chicken",
+    per100g: { calories: 200, protein: 29, carbs: 0, fat: 9, fiber: 0 },
   },
   {
-    name: "Omena (Dried Silver Cyprinid)",
-    category: "🐟 Protein",
-    per100g: { calories: 290, protein: 60, carbs: 0, fat: 8, fiber: 0 },
+    name: "Chicken Stew",
+    category: "🍗 Chicken",
+    per100g: { calories: 145, protein: 18, carbs: 5, fat: 6, fiber: 1 },
+  },
+
+  // ==============================
+  // 🥩 BEEF — Multiple Preparations
+  // ==============================
+  {
+    name: "Beef — Raw (Medium Fat)",
+    category: "🥩 Beef",
+    per100g: { calories: 151, protein: 19.7, carbs: 1.8, fat: 7.2, fiber: 0 },
   },
   {
-    name: "Tuna (Canned in Water)",
-    category: "🐟 Protein",
-    per100g: { calories: 116, protein: 26, carbs: 0, fat: 1, fiber: 0 },
-  },
-  {
-    name: "Beef Lean (Cooked)",
-    category: "🥩 Protein",
+    name: "Beef — Lean, Boiled",
+    category: "🥩 Beef",
     per100g: { calories: 218, protein: 30, carbs: 0, fat: 10, fiber: 0 },
   },
   {
-    name: "Nyama Choma - Beef",
-    category: "🥩 Protein",
+    name: "Nyama Choma — Beef",
+    category: "🥩 Beef",
     per100g: { calories: 250, protein: 26, carbs: 0, fat: 15, fiber: 0 },
   },
   {
-    name: "Nyama Choma - Goat",
-    category: "🥩 Protein",
+    name: "Beef Stew",
+    category: "🥩 Beef",
+    per100g: { calories: 175, protein: 20, carbs: 6, fat: 8, fiber: 1.5 },
+  },
+  {
+    name: "Matumbo (Tripe) — Boiled",
+    category: "🥩 Beef",
+    per100g: { calories: 96, protein: 14.8, carbs: 0, fat: 4, fiber: 0 },
+  },
+  {
+    name: "Liver — Beef, Fried",
+    category: "🥩 Beef",
+    per100g: { calories: 208, protein: 26, carbs: 5.9, fat: 8.8, fiber: 0 },
+  },
+  {
+    name: "Sausages — Beef",
+    category: "🥩 Beef",
+    per100g: { calories: 326, protein: 13.7, carbs: 2.7, fat: 28.7, fiber: 0 },
+  },
+
+  // ==============================
+  // 🐑 GOAT & PORK
+  // ==============================
+  {
+    name: "Nyama Choma — Goat",
+    category: "🐑 Goat",
     per100g: { calories: 231, protein: 27, carbs: 0, fat: 13, fiber: 0 },
   },
   {
-    name: "Maziwa (Whole Milk)",
-    category: "🥛 Dairy",
-    per100g: { calories: 61, protein: 3.2, carbs: 4.8, fat: 3.3, fiber: 0 },
+    name: "Goat Meat — Boiled",
+    category: "🐑 Goat",
+    per100g: { calories: 185, protein: 27, carbs: 0, fat: 8, fiber: 0 },
   },
   {
-    name: "Mtindi (Fermented Milk)",
-    category: "🥛 Dairy",
-    per100g: { calories: 52, protein: 3.5, carbs: 4, fat: 2.5, fiber: 0 },
+    name: "Goat Meat — Stew",
+    category: "🐑 Goat",
+    per100g: { calories: 160, protein: 22, carbs: 4, fat: 6.5, fiber: 0.8 },
   },
   {
-    name: "Groundnuts (Peanuts)",
-    category: "🥜 Nuts",
-    per100g: { calories: 567, protein: 26, carbs: 16, fat: 49, fiber: 8.5 },
+    name: "Pork — Lean, Boiled",
+    category: "🐷 Pork",
+    per100g: { calories: 242, protein: 27, carbs: 0, fat: 14, fiber: 0 },
   },
   {
-    name: "Peanut Butter",
-    category: "🥜 Nuts",
-    per100g: { calories: 588, protein: 25, carbs: 20, fat: 50, fiber: 6 },
+    name: "Pork Ribs — Grilled",
+    category: "🐷 Pork",
+    per100g: { calories: 290, protein: 20, carbs: 0, fat: 22, fiber: 0 },
+  },
+
+  // ==============================
+  // 🐟 FISH — Multiple Types & Preparations
+  // ==============================
+  {
+    name: "Tilapia — Raw",
+    category: "🐟 Fish",
+    per100g: { calories: 96, protein: 20, carbs: 0, fat: 1.7, fiber: 0 },
   },
   {
-    name: "Maharage (Beans)",
+    name: "Tilapia — Grilled",
+    category: "🐟 Fish",
+    per100g: { calories: 128, protein: 26, carbs: 0, fat: 2.7, fiber: 0 },
+  },
+  {
+    name: "Tilapia — Fried",
+    category: "🐟 Fish",
+    per100g: { calories: 196, protein: 26, carbs: 0, fat: 10, fiber: 0 },
+  },
+  {
+    name: "Tilapia — Boiled",
+    category: "🐟 Fish",
+    per100g: { calories: 112, protein: 23, carbs: 0, fat: 2.3, fiber: 0 },
+  },
+  {
+    name: "Omena — Dried, Raw",
+    category: "🐟 Fish",
+    per100g: { calories: 290, protein: 60, carbs: 0, fat: 8, fiber: 0 },
+  },
+  {
+    name: "Omena — Fried",
+    category: "🐟 Fish",
+    per100g: { calories: 320, protein: 55, carbs: 2, fat: 12, fiber: 0 },
+  },
+  {
+    name: "Omena — Stew",
+    category: "🐟 Fish",
+    per100g: { calories: 180, protein: 35, carbs: 3, fat: 7, fiber: 0.5 },
+  },
+  {
+    name: "Nile Perch (Mbuta) — Grilled",
+    category: "🐟 Fish",
+    per100g: { calories: 125, protein: 26.7, carbs: 0, fat: 2.2, fiber: 0 },
+  },
+  {
+    name: "Mackerel — Grilled",
+    category: "🐟 Fish",
+    per100g: { calories: 205, protein: 19, carbs: 0, fat: 13.8, fiber: 0 },
+  },
+  {
+    name: "Tuna — Canned in Water",
+    category: "🐟 Fish",
+    per100g: { calories: 116, protein: 26, carbs: 0, fat: 1, fiber: 0 },
+  },
+  {
+    name: "Tuna — Canned in Oil",
+    category: "🐟 Fish",
+    per100g: { calories: 198, protein: 24, carbs: 0, fat: 11, fiber: 0 },
+  },
+  {
+    name: "Prawns — Boiled",
+    category: "🐟 Fish",
+    per100g: { calories: 99, protein: 21, carbs: 0.9, fat: 1.1, fiber: 0 },
+  },
+  {
+    name: "Sardines — Canned",
+    category: "🐟 Fish",
+    per100g: { calories: 208, protein: 24.6, carbs: 0, fat: 11.5, fiber: 0 },
+  },
+
+  // ==============================
+  // 🌾 CEREALS & UGALI VARIETIES
+  // ==============================
+  {
+    name: "Ugali — Refined Maize",
+    category: "🌾 Cereals",
+    per100g: { calories: 148, protein: 3.4, carbs: 27.3, fat: 1.9, fiber: 1.6 },
+  },
+  {
+    name: "Ugali — Whole Maize",
+    category: "🌾 Cereals",
+    per100g: { calories: 141, protein: 3.2, carbs: 26, fat: 1.8, fiber: 2.1 },
+  },
+  {
+    name: "Ugali — Sorghum",
+    category: "🌾 Cereals",
+    per100g: { calories: 138, protein: 3.5, carbs: 27, fat: 1.5, fiber: 2.5 },
+  },
+  {
+    name: "Ugali — Millet (Wimbi)",
+    category: "🌾 Cereals",
+    per100g: { calories: 142, protein: 3.3, carbs: 28, fat: 1.2, fiber: 2.3 },
+  },
+  {
+    name: "Wali — White Rice",
+    category: "🌾 Cereals",
+    per100g: { calories: 130, protein: 2.7, carbs: 28, fat: 0.3, fiber: 0.4 },
+  },
+  {
+    name: "Wali — Brown Rice",
+    category: "🌾 Cereals",
+    per100g: { calories: 123, protein: 2.7, carbs: 26, fat: 0.9, fiber: 1.8 },
+  },
+  {
+    name: "Pilau — Spiced Rice",
+    category: "🌾 Cereals",
+    per100g: { calories: 180, protein: 4, carbs: 35, fat: 3, fiber: 0.8 },
+  },
+  {
+    name: "Biryani — Chicken",
+    category: "🌾 Cereals",
+    per100g: { calories: 220, protein: 12, carbs: 30, fat: 6, fiber: 1.5 },
+  },
+  {
+    name: "Oats — Cooked",
+    category: "🌾 Cereals",
+    per100g: { calories: 71, protein: 2.5, carbs: 12, fat: 1.5, fiber: 1.7 },
+  },
+  {
+    name: "Corn Flakes",
+    category: "🌾 Cereals",
+    per100g: { calories: 357, protein: 6, carbs: 84, fat: 0.4, fiber: 1.2 },
+  },
+
+  // ==============================
+  // 🫓 BREADS & PASTRIES
+  // ==============================
+  {
+    name: "Chapati",
+    category: "🫓 Breads",
+    per100g: { calories: 306, protein: 8, carbs: 50, fat: 9, fiber: 2 },
+  },
+  {
+    name: "Mandazi",
+    category: "🫓 Breads",
+    per100g: { calories: 320, protein: 7, carbs: 52, fat: 10, fiber: 1.5 },
+  },
+  {
+    name: "Mahamri",
+    category: "🫓 Breads",
+    per100g: { calories: 310, protein: 7, carbs: 50, fat: 9.5, fiber: 1.8 },
+  },
+  {
+    name: "Mkate — White Bread",
+    category: "🫓 Breads",
+    per100g: { calories: 265, protein: 9, carbs: 49, fat: 3.2, fiber: 2.7 },
+  },
+  {
+    name: "Mkate — Brown Bread",
+    category: "🫓 Breads",
+    per100g: { calories: 247, protein: 10, carbs: 47, fat: 3.5, fiber: 5.6 },
+  },
+
+  // ==============================
+  // 🥔 STARCHY ROOTS & TUBERS
+  // ==============================
+  {
+    name: "Viazi Vitamu — Boiled",
+    category: "🥔 Tubers",
+    per100g: { calories: 86, protein: 1.6, carbs: 20, fat: 0.1, fiber: 3 },
+  },
+  {
+    name: "Muhogo (Cassava) — Boiled",
+    category: "🥔 Tubers",
+    per100g: { calories: 159, protein: 1.4, carbs: 38, fat: 0.3, fiber: 1.8 },
+  },
+  {
+    name: "Irish Potato — Boiled",
+    category: "🥔 Tubers",
+    per100g: { calories: 87, protein: 1.9, carbs: 20, fat: 0.1, fiber: 1.8 },
+  },
+  {
+    name: "Viazi Karai — Fried",
+    category: "🥔 Tubers",
+    per100g: { calories: 312, protein: 3.8, carbs: 38, fat: 16, fiber: 2.8 },
+  },
+  {
+    name: "Matoke — Boiled",
+    category: "🥔 Tubers",
+    per100g: { calories: 122, protein: 1, carbs: 31, fat: 0.3, fiber: 2.3 },
+  },
+  {
+    name: "Nduma (Arrowroot) — Boiled",
+    category: "🥔 Tubers",
+    per100g: { calories: 112, protein: 1.5, carbs: 26, fat: 0.2, fiber: 4.1 },
+  },
+
+  // ==============================
+  // 🫘 LEGUMES & PULSES
+  // ==============================
+  {
+    name: "Maharage (Kidney Beans)",
     category: "🫘 Legumes",
     per100g: { calories: 132, protein: 8.7, carbs: 24, fat: 0.5, fiber: 6 },
   },
@@ -87,153 +361,424 @@ const kenyanFoods = [
     category: "🫘 Legumes",
     per100g: { calories: 116, protein: 8, carbs: 21, fat: 0.5, fiber: 5 },
   },
-
-  // CARBS — Fuel
   {
-    name: "Ugali (Maize Meal)",
-    category: "🍚 Staples",
-    per100g: { calories: 119, protein: 2.5, carbs: 27, fat: 0.5, fiber: 0.8 },
+    name: "Njahi (Black Beans)",
+    category: "🫘 Legumes",
+    per100g: { calories: 132, protein: 8.9, carbs: 24, fat: 0.5, fiber: 6.5 },
   },
   {
-    name: "Oats (Cooked)",
-    category: "🌾 Breakfast",
-    per100g: { calories: 71, protein: 2.5, carbs: 12, fat: 1.5, fiber: 1.7 },
+    name: "Pigeon Peas (Mbaazi)",
+    category: "🫘 Legumes",
+    per100g: { calories: 116, protein: 6.8, carbs: 21, fat: 0.4, fiber: 4.3 },
   },
   {
-    name: "Brown Rice (Cooked)",
-    category: "🍚 Staples",
-    per100g: { calories: 123, protein: 2.7, carbs: 26, fat: 0.9, fiber: 1.8 },
+    name: "Lentils (Dengu)",
+    category: "🫘 Legumes",
+    per100g: { calories: 116, protein: 9, carbs: 20, fat: 0.4, fiber: 7.9 },
   },
   {
-    name: "Wali (White Rice)",
-    category: "🍚 Staples",
-    per100g: { calories: 130, protein: 2.7, carbs: 28, fat: 0.3, fiber: 0.4 },
-  },
-  {
-    name: "Viazi Vitamu (Sweet Potato)",
-    category: "🍠 Staples",
-    per100g: { calories: 86, protein: 1.6, carbs: 20, fat: 0.1, fiber: 3 },
-  },
-  {
-    name: "Chapati",
-    category: "🫓 Bread",
-    per100g: { calories: 306, protein: 8, carbs: 50, fat: 9, fiber: 2 },
+    name: "Soybean — Boiled",
+    category: "🫘 Legumes",
+    per100g: { calories: 173, protein: 17, carbs: 10, fat: 9, fiber: 6 },
   },
   {
     name: "Githeri (Maize & Beans)",
-    category: "🫘 Staples",
+    category: "🫘 Legumes",
     per100g: { calories: 152, protein: 7, carbs: 28, fat: 1.5, fiber: 5 },
   },
   {
-    name: "Mukimo",
-    category: "🥔 Staples",
-    per100g: { calories: 95, protein: 3, carbs: 18, fat: 2, fiber: 2.5 },
-  },
-  {
-    name: "Irio (Mashed Peas & Potatoes)",
-    category: "🥔 Staples",
-    per100g: { calories: 110, protein: 4, carbs: 20, fat: 1.5, fiber: 3 },
-  },
-  {
-    name: "Matoke (Plantain)",
-    category: "🍚 Staples",
-    per100g: { calories: 122, protein: 1, carbs: 31, fat: 0.3, fiber: 2.3 },
-  },
-  {
-    name: "Muhogo (Cassava)",
-    category: "🍚 Staples",
-    per100g: { calories: 159, protein: 1.4, carbs: 38, fat: 0.3, fiber: 1.8 },
-  },
-  {
-    name: "Pilau (Spiced Rice)",
-    category: "🍚 Staples",
-    per100g: { calories: 180, protein: 4, carbs: 35, fat: 3, fiber: 0.8 },
-  },
-  {
-    name: "Uji (Sorghum Porridge)",
-    category: "🌾 Breakfast",
-    per100g: { calories: 70, protein: 2, carbs: 15, fat: 0.5, fiber: 1.5 },
+    name: "Nyoyo (Maize & Beans)",
+    category: "🫘 Legumes",
+    per100g: { calories: 145, protein: 6.5, carbs: 26, fat: 1.2, fiber: 4.5 },
   },
 
-  // VEGETABLES
+  // ==============================
+  // 🥬 VEGETABLES
+  // ==============================
   {
-    name: "Sukuma Wiki (Kale)",
+    name: "Sukuma Wiki — Stir-Fried",
     category: "🥬 Vegetables",
-    per100g: { calories: 28, protein: 2.2, carbs: 3.5, fat: 0.5, fiber: 2 },
+    per100g: { calories: 54, protein: 2.5, carbs: 2.1, fat: 3.2, fiber: 2 },
   },
   {
-    name: "Spinach (Mchicha)",
+    name: "Sukuma Wiki — Steamed",
+    category: "🥬 Vegetables",
+    per100g: { calories: 25, protein: 2.2, carbs: 3.5, fat: 0.5, fiber: 2 },
+  },
+  {
+    name: "Spinach (Mchicha) — Boiled",
     category: "🥬 Vegetables",
     per100g: { calories: 23, protein: 2.9, carbs: 3.6, fat: 0.4, fiber: 2.2 },
   },
   {
-    name: "Cabbage",
+    name: "Managu (African Nightshade)",
+    category: "🥬 Vegetables",
+    per100g: { calories: 33, protein: 3.1, carbs: 5, fat: 0.5, fiber: 2.1 },
+  },
+  {
+    name: "Terere (Amaranth Leaves)",
+    category: "🥬 Vegetables",
+    per100g: { calories: 23, protein: 2.5, carbs: 3.5, fat: 0.4, fiber: 2.3 },
+  },
+  {
+    name: "Mrenda (Jute Mallow)",
+    category: "🥬 Vegetables",
+    per100g: { calories: 29, protein: 2, carbs: 4.5, fat: 0.5, fiber: 2 },
+  },
+  {
+    name: "Cabbage — Boiled",
     category: "🥬 Vegetables",
     per100g: { calories: 25, protein: 1.3, carbs: 5.8, fat: 0.1, fiber: 2.5 },
   },
   {
-    name: "Tomatoes",
-    category: "🍅 Vegetables",
+    name: "Tomatoes — Raw",
+    category: "🥬 Vegetables",
     per100g: { calories: 18, protein: 0.9, carbs: 3.9, fat: 0.2, fiber: 1.2 },
   },
-
-  // FRUITS
   {
-    name: "Avocado",
-    category: "🥑 Fruits",
-    per100g: { calories: 160, protein: 2, carbs: 9, fat: 15, fiber: 7 },
+    name: "Onions — Raw",
+    category: "🥬 Vegetables",
+    per100g: { calories: 40, protein: 1.1, carbs: 9.3, fat: 0.1, fiber: 1.7 },
   },
   {
-    name: "Banana",
+    name: "Carrots — Boiled",
+    category: "🥬 Vegetables",
+    per100g: { calories: 35, protein: 0.8, carbs: 8.2, fat: 0.2, fiber: 3 },
+  },
+  {
+    name: "Capsicum (Pilipili Hoho)",
+    category: "🥬 Vegetables",
+    per100g: { calories: 31, protein: 1, carbs: 6, fat: 0.3, fiber: 2.1 },
+  },
+  {
+    name: "Pumpkin (Boga) — Boiled",
+    category: "🥬 Vegetables",
+    per100g: { calories: 26, protein: 1, carbs: 6.5, fat: 0.1, fiber: 0.5 },
+  },
+  {
+    name: "Cowpea Leaves (Kunde Leaves)",
+    category: "🥬 Vegetables",
+    per100g: { calories: 42, protein: 4.3, carbs: 7, fat: 0.4, fiber: 2.5 },
+  },
+
+  // ==============================
+  // 🥑 FRUITS
+  // ==============================
+  {
+    name: "Avocado — Ripe",
+    category: "🥑 Fruits",
+    per100g: { calories: 185, protein: 1.6, carbs: 0, fat: 19.6, fiber: 7 },
+  },
+  {
+    name: "Banana — Ripe",
     category: "🍌 Fruits",
     per100g: { calories: 89, protein: 1.1, carbs: 23, fat: 0.3, fiber: 2.6 },
   },
   {
-    name: "Mango",
+    name: "Mango — Ripe",
     category: "🥭 Fruits",
     per100g: { calories: 60, protein: 0.8, carbs: 15, fat: 0.4, fiber: 1.6 },
   },
-
-  // SNACKS
   {
-    name: "Mandazi",
-    category: "🍩 Snacks",
-    per100g: { calories: 320, protein: 7, carbs: 52, fat: 10, fiber: 1.5 },
+    name: "Pawpaw (Papaya)",
+    category: "🍈 Fruits",
+    per100g: { calories: 43, protein: 0.5, carbs: 11, fat: 0.3, fiber: 1.7 },
+  },
+  {
+    name: "Pineapple",
+    category: "🍍 Fruits",
+    per100g: { calories: 50, protein: 0.5, carbs: 13, fat: 0.1, fiber: 1.4 },
+  },
+  {
+    name: "Orange",
+    category: "🍊 Fruits",
+    per100g: { calories: 47, protein: 0.9, carbs: 12, fat: 0.1, fiber: 2.4 },
+  },
+  {
+    name: "Guava",
+    category: "🍈 Fruits",
+    per100g: { calories: 68, protein: 2.6, carbs: 14, fat: 1, fiber: 5.4 },
+  },
+  {
+    name: "Passion Fruit",
+    category: "🍈 Fruits",
+    per100g: { calories: 97, protein: 2.2, carbs: 23, fat: 0.7, fiber: 10.4 },
+  },
+  {
+    name: "Watermelon",
+    category: "🍉 Fruits",
+    per100g: { calories: 30, protein: 0.6, carbs: 7.6, fat: 0.2, fiber: 0.4 },
+  },
+
+  // ==============================
+  // 🥛 DAIRY
+  // ==============================
+  {
+    name: "Maziwa — Whole Fresh Milk",
+    category: "🥛 Dairy",
+    per100g: { calories: 61, protein: 3.2, carbs: 4.8, fat: 3.3, fiber: 0 },
+  },
+  {
+    name: "Mtindi (Fermented Milk)",
+    category: "🥛 Dairy",
+    per100g: { calories: 52, protein: 3.5, carbs: 4, fat: 2.5, fiber: 0 },
+  },
+  {
+    name: "Mursik",
+    category: "🥛 Dairy",
+    per100g: { calories: 58, protein: 3.1, carbs: 3.6, fat: 3.5, fiber: 0 },
+  },
+  {
+    name: "Maziwa Lala (Soured Milk)",
+    category: "🥛 Dairy",
+    per100g: { calories: 56, protein: 3.3, carbs: 4.2, fat: 2.8, fiber: 0 },
+  },
+  {
+    name: "Yogurt — Plain",
+    category: "🥛 Dairy",
+    per100g: { calories: 61, protein: 3.5, carbs: 4.7, fat: 3.3, fiber: 0 },
+  },
+  {
+    name: "Maziwa — Skimmed",
+    category: "🥛 Dairy",
+    per100g: { calories: 34, protein: 3.4, carbs: 5, fat: 0.2, fiber: 0 },
+  },
+  {
+    name: "Cheese — Processed",
+    category: "🥛 Dairy",
+    per100g: { calories: 350, protein: 25, carbs: 1.3, fat: 27, fiber: 0 },
+  },
+
+  // ==============================
+  // 🥜 NUTS & SEEDS
+  // ==============================
+  {
+    name: "Groundnuts — Roasted",
+    category: "🥜 Nuts",
+    per100g: { calories: 567, protein: 26, carbs: 16, fat: 49, fiber: 8.5 },
+  },
+  {
+    name: "Peanut Butter",
+    category: "🥜 Nuts",
+    per100g: { calories: 588, protein: 25, carbs: 20, fat: 50, fiber: 6 },
+  },
+  {
+    name: "Sunflower Seeds",
+    category: "🥜 Nuts",
+    per100g: { calories: 584, protein: 20.8, carbs: 20, fat: 51.5, fiber: 8.6 },
+  },
+  {
+    name: "Simsim (Sesame Seeds)",
+    category: "🥜 Nuts",
+    per100g: {
+      calories: 573,
+      protein: 17.7,
+      carbs: 23.5,
+      fat: 49.7,
+      fiber: 11.8,
+    },
+  },
+  {
+    name: "Cashew Nuts",
+    category: "🥜 Nuts",
+    per100g: {
+      calories: 553,
+      protein: 18.2,
+      carbs: 30.2,
+      fat: 43.9,
+      fiber: 3.3,
+    },
+  },
+  {
+    name: "Macadamia Nuts",
+    category: "🥜 Nuts",
+    per100g: {
+      calories: 718,
+      protein: 7.9,
+      carbs: 13.8,
+      fat: 75.8,
+      fiber: 8.6,
+    },
+  },
+  {
+    name: "Almonds",
+    category: "🥜 Nuts",
+    per100g: {
+      calories: 579,
+      protein: 21.2,
+      carbs: 21.6,
+      fat: 49.9,
+      fiber: 12.5,
+    },
+  },
+  {
+    name: "Coconut — Desiccated",
+    category: "🥜 Nuts",
+    per100g: {
+      calories: 660,
+      protein: 6.9,
+      carbs: 23.7,
+      fat: 64.5,
+      fiber: 16.3,
+    },
+  },
+
+  // ==============================
+  // 🥣 PORRIDGE & BREAKFAST
+  // ==============================
+  {
+    name: "Uji — Maize Porridge",
+    category: "🥣 Porridge",
+    per100g: { calories: 55, protein: 1.2, carbs: 12, fat: 0.3, fiber: 0.8 },
+  },
+  {
+    name: "Uji — Sorghum Porridge",
+    category: "🥣 Porridge",
+    per100g: { calories: 70, protein: 2, carbs: 15, fat: 0.5, fiber: 1.5 },
+  },
+  {
+    name: "Uji — Millet Porridge",
+    category: "🥣 Porridge",
+    per100g: { calories: 68, protein: 2.2, carbs: 14, fat: 0.6, fiber: 1.8 },
+  },
+  {
+    name: "Uji wa Mahindi (Thick Porridge)",
+    category: "🥣 Porridge",
+    per100g: { calories: 90, protein: 2, carbs: 20, fat: 0.5, fiber: 1.2 },
+  },
+
+  // ==============================
+  // 🍲 MIXED DISHES & SNACKS
+  // ==============================
+  {
+    name: "Mukimo",
+    category: "🍲 Mixed Dishes",
+    per100g: { calories: 95, protein: 3, carbs: 18, fat: 2, fiber: 2.5 },
+  },
+  {
+    name: "Irio (Mashed Peas & Potatoes)",
+    category: "🍲 Mixed Dishes",
+    per100g: { calories: 110, protein: 4, carbs: 20, fat: 1.5, fiber: 3 },
+  },
+  {
+    name: "Maharagwe (Bean Stew)",
+    category: "🍲 Mixed Dishes",
+    per100g: { calories: 148, protein: 8, carbs: 25, fat: 2.5, fiber: 6.5 },
+  },
+  {
+    name: "Viazi Masala (Spiced Potatoes)",
+    category: "🍲 Mixed Dishes",
+    per100g: { calories: 130, protein: 3, carbs: 24, fat: 3, fiber: 2.8 },
   },
   {
     name: "Samosa",
-    category: "🥟 Snacks",
+    category: "🍲 Mixed Dishes",
     per100g: { calories: 262, protein: 6, carbs: 30, fat: 13, fiber: 2 },
   },
   {
     name: "Bhajia (Potato Bhajia)",
-    category: "🥟 Snacks",
+    category: "🍲 Mixed Dishes",
     per100g: { calories: 280, protein: 5, carbs: 32, fat: 14, fiber: 2.5 },
   },
+
+  // ==============================
+  // ☕ BEVERAGES
+  // ==============================
   {
-    name: "Viazi Karai (Fried Potatoes)",
-    category: "🥟 Snacks",
-    per100g: { calories: 312, protein: 3.8, carbs: 38, fat: 16, fiber: 2.8 },
+    name: "Chai (Tea with Milk & Sugar)",
+    category: "☕ Drinks",
+    per100g: { calories: 65, protein: 1.5, carbs: 10, fat: 1.5, fiber: 0 },
+  },
+  {
+    name: "Tea — Black (No Sugar)",
+    category: "☕ Drinks",
+    per100g: { calories: 1, protein: 0, carbs: 0.2, fat: 0, fiber: 0 },
+  },
+  {
+    name: "Coffee — Black",
+    category: "☕ Drinks",
+    per100g: { calories: 2, protein: 0.3, carbs: 0.3, fat: 0, fiber: 0 },
+  },
+  {
+    name: "Fresh Orange Juice",
+    category: "☕ Drinks",
+    per100g: { calories: 45, protein: 0.7, carbs: 10.4, fat: 0.2, fiber: 0.2 },
+  },
+
+  // ==============================
+  // 🫒 OILS & FATS
+  // ==============================
+  {
+    name: "Cooking Oil — Vegetable",
+    category: "🫒 Oils",
+    per100g: { calories: 884, protein: 0, carbs: 0, fat: 100, fiber: 0 },
+  },
+  {
+    name: "Butter",
+    category: "🫒 Oils",
+    per100g: { calories: 717, protein: 0.9, carbs: 0.1, fat: 81, fiber: 0 },
+  },
+  {
+    name: "Margarine",
+    category: "🫒 Oils",
+    per100g: { calories: 717, protein: 0.2, carbs: 0.7, fat: 80.7, fiber: 0 },
+  },
+  {
+    name: "Coconut Oil",
+    category: "🫒 Oils",
+    per100g: { calories: 862, protein: 0, carbs: 0, fat: 100, fiber: 0 },
+  },
+
+  // ==============================
+  // 🦗 TRADITIONAL KENYAN INSECTS
+  // ==============================
+  {
+    name: "Nsenene (Grasshoppers) — Dried",
+    category: "🦗 Insects",
+    per100g: { calories: 560, protein: 35, carbs: 20, fat: 35, fiber: 3.2 },
+  },
+  {
+    name: "Kumbi Kumbi (Flying Ants)",
+    category: "🦗 Insects",
+    per100g: { calories: 580, protein: 40, carbs: 8, fat: 45, fiber: 2.8 },
+  },
+  {
+    name: "Mopane Worms — Dried",
+    category: "🦗 Insects",
+    per100g: { calories: 430, protein: 48, carbs: 10, fat: 15, fiber: 4.5 },
   },
 ];
 // ==============================
 // NATURAL SERVING UNITS
 // ==============================
 const servingUnits = {
-  "Eggs (Boiled)": { plural: "eggs", grams: 50 },
-  "Chicken Breast (Grilled)": { plural: "pieces", grams: 150 },
-  "Kuku wa Kienyeji": { plural: "pieces", grams: 200 },
-  "Tilapia (Grilled)": { plural: "fillets", grams: 150 },
-  Chapati: { plural: "pieces", grams: 80 },
-  Mandazi: { plural: "pieces", grams: 60 },
+  "Eggs — Raw (Whole)": { plural: "eggs", grams: 55 },
+  "Eggs — Boiled": { plural: "eggs", grams: 55 },
+  "Eggs — Fried (in oil)": { plural: "eggs", grams: 55 },
+  "Eggs — Scrambled (with milk)": { plural: "eggs", grams: 55 },
+  "Eggs — Omelette (plain)": { plural: "eggs", grams: 55 },
+  Chapati: { plural: "chapatis", grams: 80 },
+  Mandazi: { plural: "mandazis", grams: 60 },
+  Mahamri: { plural: "mahamris", grams: 65 },
   Samosa: { plural: "samosas", grams: 50 },
-  Banana: { plural: "bananas", grams: 120 },
-  Avocado: { plural: "avocados", grams: 200 },
-  Mango: { plural: "mangoes", grams: 300 },
+  "Banana — Ripe": { plural: "bananas", grams: 120 },
+  "Avocado — Ripe": { plural: "avocados", grams: 200 },
+  "Mango — Ripe": { plural: "mangoes", grams: 300 },
+  "Chicken Breast — Grilled": { plural: "pieces", grams: 150 },
+  "Chicken Breast — Boiled": { plural: "pieces", grams: 150 },
+  "Chicken Leg — Grilled": { plural: "pieces", grams: 120 },
+  "Chicken Wings — Grilled": { plural: "wings", grams: 80 },
+  "Kuku wa Kienyeji — Boiled": { plural: "pieces", grams: 200 },
+  "Kuku wa Kienyeji — Grilled": { plural: "pieces", grams: 200 },
+  "Nyama Choma — Beef": { plural: "portions", grams: 250 },
+  "Nyama Choma — Goat": { plural: "portions", grams: 250 },
+  "Tilapia — Grilled": { plural: "fillets", grams: 150 },
+  "Tilapia — Fried": { plural: "fillets", grams: 150 },
+  "Tilapia — Boiled": { plural: "fillets", grams: 150 },
   "Bhajia (Potato Bhajia)": { plural: "pieces", grams: 20 },
-  "Viazi Karai (Fried Potatoes)": { plural: "pieces", grams: 30 },
-  "Nyama Choma - Beef": { plural: "portions", grams: 250 },
-  "Nyama Choma - Goat": { plural: "portions", grams: 250 },
+  "Mkate — White Bread": { plural: "slices", grams: 35 },
+  "Mkate — Brown Bread": { plural: "slices", grams: 35 },
+  "Sausages — Beef": { plural: "sausages", grams: 55 },
 };
 // ==============================
 // STATE
