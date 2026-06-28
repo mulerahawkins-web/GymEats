@@ -766,42 +766,44 @@ footer {
 }
 
 /* ===== RESPONSIVE ===== */
-/* ===== AMOUNT INPUT ROW ===== */
-.amount-input-row {
+/* ===== SMART AMOUNT INPUT ===== */
+.smart-amount-row {
   display: flex;
   gap: 8px;
   align-items: stretch;
 }
 
-.amount-input-row input {
+.smart-amount-row input {
   flex: 1;
+  min-width: 0;
 }
 
-.amount-input-row select {
-  width: 140px;
-  padding: 11px 10px;
+.unit-suffix {
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  background: #f0f4f8;
   border: 1.5px solid var(--border);
   border-radius: 8px;
-  font-size: 0.8rem;
-  color: var(--text);
-  background: #fafafa;
-  outline: none;
-  cursor: pointer;
-  font-family: inherit;
-  transition: border-color 0.2s;
-}
-
-.amount-input-row select:focus {
-  border-color: var(--accent);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-light);
+  white-space: nowrap;
 }
 
 .gram-hint {
-  font-size: 0.74rem;
+  font-size: 0.78rem;
   color: var(--accent);
-  font-weight: 700;
-  margin-top: 4px;
+  font-weight: 600;
+  margin-top: 6px;
   display: block;
-  min-height: 14px;
+  min-height: 16px;
+}
+
+[data-theme="dark"] .unit-suffix {
+  background: #1a2234;
+  border-color: #1e293b;
+  color: #94a3b8;
 }
 @media (max-width: 768px) {
   /* ── Header ── */

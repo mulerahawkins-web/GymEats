@@ -198,20 +198,13 @@
           <div class="dropdown" id="dropdown"></div>
         </div>
         <div class="input-group grams-wrap">
-          <label>Amount</label>
-          <div class="amount-input-row">
-            <input
-              type="number"
-              id="servingSize"
-              placeholder="e.g. 200"
-              min="1"
-            />
-            <select id="servingUnit" onchange="handleUnitChange()">
-              <option value="g">grams (g)</option>
-            </select>
-          </div>
-          <small class="gram-hint" id="gramHint"></small>
-        </div>
+    <label>Amount (g)</label>
+    <div class="smart-amount-row">
+        <input type="number" id="servingSize" placeholder="e.g. 200" min="1">
+        <span class="unit-suffix">g</span>
+    </div>
+    <small class="gram-hint" id="gramHint"></small>
+</div>
         <div class="input-group">
           <label>Meal</label>
           <select id="mealTime">

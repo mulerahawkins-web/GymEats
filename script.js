@@ -458,24 +458,19 @@ function selectFoodByIndex(idx) {
   document.getElementById("foodSearch").value = selectedFood.name;
   document.getElementById("dropdown").classList.remove("active");
 
-  // Populate unit dropdown based on food
-  const unitSelect = document.getElementById("servingUnit");
+  // Show helpful gram tip for foods people think in pieces
   const unitData = servingUnits[selectedFood.name];
+  const hint = document.getElementById("gramHint");
 
-  unitSelect.innerHTML = '<option value="g">grams (g)</option>';
   if (unitData) {
-    unitSelect.innerHTML += `<option value="unit">${unitData.plural} (~${unitData.grams}g each)</option>`;
+    hint.textContent = `💡 1 ${unitData.plural.slice(0, -1)} ≈ ${unitData.grams}g`;
+  } else {
+    hint.textContent = "";
   }
 
-  // Reset hints and placeholder
-  document.getElementById("gramHint").textContent = "";
-  document.getElementById("servingSize").placeholder = unitData
-    ? "e.g. 3"
-    : "e.g. 200";
-
+  document.getElementById("servingSize").placeholder = "e.g. 200";
   updatePreview();
 }
-
 // ==============================
 // NUTRIENT PREVIEW
 // ==============================
@@ -516,9 +511,9 @@ function addFood() {
     alert("Please select a food from the list!");
     return;
   }
-  const grams = parseFloat(document.getElementById("servingSize").value);
-  if (!grams || grams <= 0) {
-    alert("Please enter a valid serving size in grams!");
+  const grams = getGrams();
+  if (!grams) {
+    alert("Please enter a valid amount!");
     return;
   }
 
@@ -721,4 +716,13 @@ function loadSavedTheme() {
   if (savedTheme === "dark") {
     document.documentElement.setAttribute("data-theme", "dark");
   }
+}
+// ==============================
+// UNIT HELPERS
+// ==============================
+
+function getGrams() {
+  const val = parseFloat(document.getElementById("servingSize").value);
+  if (!val || val <= 0) return null;
+  return val;
 }
