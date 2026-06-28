@@ -400,7 +400,7 @@ function calculateTargets() {
   dailyTargets = { calories, protein, carbs, fat };
 
   const labels = {
-    bulk: "💪 Bulking",
+    bulk: "💪🏾 Bulking",
     cut: "🔥 Cutting",
     maintain: "⚖️ Maintain",
   };
