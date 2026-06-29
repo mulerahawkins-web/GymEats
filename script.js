@@ -1014,11 +1014,12 @@ function selectFoodByIndex(idx) {
 
   if (unitData) {
     hint.textContent = `💡 1 ${unitData.plural.slice(0, -1)} ≈ ${unitData.grams}g`;
+    document.getElementById("servingSize").placeholder = "e.g. 3";
   } else {
     hint.textContent = "";
+    document.getElementById("servingSize").placeholder = "e.g. 200";
   }
 
-  document.getElementById("servingSize").placeholder = "e.g. 200";
   updatePreview();
 }
 // ==============================

@@ -777,34 +777,6 @@ footer {
   flex: 1;
   min-width: 0;
 }
-
-.unit-suffix {
-  display: flex;
-  align-items: center;
-  padding: 0 16px;
-  background: #f0f4f8;
-  border: 1.5px solid var(--border);
-  border-radius: 8px;
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: var(--text-light);
-  white-space: nowrap;
-}
-
-.gram-hint {
-  font-size: 0.78rem;
-  color: var(--accent);
-  font-weight: 600;
-  margin-top: 6px;
-  display: block;
-  min-height: 16px;
-}
-
-[data-theme="dark"] .unit-suffix {
-  background: #1a2234;
-  border-color: #1e293b;
-  color: #94a3b8;
-}
 @media (max-width: 768px) {
   /* ── Header ── */
   header {
