@@ -156,6 +156,8 @@ header {
   width: 100%;
   max-width: 460px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  max-height: 90vh;
+  overflow-y: auto;
 }
 
 .modal h2 {
@@ -163,6 +165,55 @@ header {
   font-weight: 700;
   color: var(--primary);
   margin-bottom: 4px;
+}
+
+.modal-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.tdee-preview {
+  background: #f0fdf9;
+  border: 1.5px solid var(--accent);
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin: 4px 0 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tdee-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  color: var(--text-light);
+}
+
+.tdee-value {
+  font-weight: 800;
+  color: var(--accent);
+  font-size: 0.95rem;
+}
+
+[data-theme="dark"] .tdee-preview {
+  background: #0d2137;
+  border-color: var(--accent);
+}
+
+/* Greeting in header */
+.header-greeting {
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: 1px;
+}
+
+@media (max-width: 768px) {
+  .modal-row {
+    grid-template-columns: 1fr;
+  }
 }
 
 .modal-subtitle {

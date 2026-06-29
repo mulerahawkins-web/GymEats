@@ -840,10 +840,27 @@ function loadFromStorage() {
   const savedDate = localStorage.getItem("gymEatsDate");
 
   if (savedGoals) {
-    userGoals = JSON.parse(savedGoals);
+    const parsed = JSON.parse(savedGoals);
+
+    // Check if saved data has all new required fields
+    // If not clear it and show setup modal fresh
+    const isValid = parsed.name && parsed.age && parsed.height && parsed.gender;
+
+    if (!isValid) {
+      // Old data detected — wipe it silently
+      localStorage.removeItem("gymEatsGoals");
+      localStorage.removeItem("gymEatsLog");
+      localStorage.removeItem("gymEatsDate");
+      // Just show setup notice — don't open modal automatically
+      document.getElementById("setupNotice").style.display = "block";
+      return;
+    }
+
+    userGoals = parsed;
     selectedGoalType = userGoals.goalType;
     calculateTargets();
     updateProgressUI();
+    showGreeting();
     document.getElementById("setupNotice").style.display = "none";
     document.getElementById("progressSection").style.display = "block";
   }
@@ -855,7 +872,6 @@ function loadFromStorage() {
     updateTotals();
   }
 }
-
 function saveToStorage() {
   localStorage.setItem("gymEatsLog", JSON.stringify(dailyLog));
   localStorage.setItem("gymEatsDate", new Date().toDateString());
@@ -867,10 +883,23 @@ function saveToStorage() {
 function openGoalSetup() {
   document.getElementById("modalOverlay").classList.add("active");
   if (userGoals) {
-    document.getElementById("goalWeight").value = userGoals.weight;
-    document.getElementById("goalActivity").value = userGoals.activityLevel;
+    document.getElementById("goalName").value = userGoals.name || "";
+    document.getElementById("goalGender").value = userGoals.gender || "male";
+    document.getElementById("goalAge").value = userGoals.age || "";
+    document.getElementById("goalHeight").value = userGoals.height || "";
+    document.getElementById("goalWeight").value = userGoals.weight || "";
+    document.getElementById("goalActivity").value =
+      userGoals.activityLevel || "1.55";
     selectGoal(userGoals.goalType);
+    previewTDEE();
   }
+
+  // Live preview as user types
+  ["goalAge", "goalHeight", "goalWeight", "goalGender", "goalActivity"].forEach(
+    (id) => {
+      document.getElementById(id).addEventListener("input", previewTDEE);
+    },
+  );
 }
 
 function closeGoalSetup() {
@@ -893,17 +922,41 @@ function selectGoal(type) {
 }
 
 function saveGoals() {
+  const name = document.getElementById("goalName").value.trim();
+  const gender = document.getElementById("goalGender").value;
+  const age = parseFloat(document.getElementById("goalAge").value);
+  const height = parseFloat(document.getElementById("goalHeight").value);
   const weight = parseFloat(document.getElementById("goalWeight").value);
   const activityLevel = parseFloat(
     document.getElementById("goalActivity").value,
   );
 
-  if (!weight || weight < 30 || weight > 200) {
-    alert("Please enter a valid body weight between 30 and 200 kg");
+  if (!name) {
+    alert("Please enter your name!");
+    return;
+  }
+  if (!age || age < 10 || age > 100) {
+    alert("Please enter a valid age!");
+    return;
+  }
+  if (!height || height < 100) {
+    alert("Please enter a valid height in cm!");
+    return;
+  }
+  if (!weight || weight < 30) {
+    alert("Please enter a valid weight in kg!");
     return;
   }
 
-  userGoals = { weight, goalType: selectedGoalType, activityLevel };
+  userGoals = {
+    name,
+    gender,
+    age,
+    height,
+    weight,
+    goalType: selectedGoalType,
+    activityLevel,
+  };
   localStorage.setItem("gymEatsGoals", JSON.stringify(userGoals));
 
   calculateTargets();
@@ -926,13 +979,19 @@ function saveGoals() {
 // ==============================
 function calculateTargets() {
   if (!userGoals) return;
-  const { weight, goalType, activityLevel } = userGoals;
+  const { weight, height, age, gender, goalType, activityLevel } = userGoals;
 
-  const bmr = weight * 22;
+  // Mifflin-St Jeor BMR Formula
+  let bmr;
+  if (gender === "male") {
+    bmr = 10 * weight + 6.25 * height - 5 * age + 5;
+  } else {
+    bmr = 10 * weight + 6.25 * height - 5 * age - 161;
+  }
+
   const tdee = Math.round(bmr * activityLevel);
 
   let calories, protein;
-
   if (goalType === "bulk") {
     calories = tdee + 300;
     protein = Math.round(weight * 2.0);
@@ -947,7 +1006,7 @@ function calculateTargets() {
   const fat = Math.round((calories * 0.25) / 9);
   const carbs = Math.round((calories - protein * 4 - fat * 9) / 4);
 
-  dailyTargets = { calories, protein, carbs, fat };
+  dailyTargets = { calories, protein, carbs, fat, tdee };
 
   const labels = {
     bulk: "💪🏾 Bulking",
@@ -1300,6 +1359,149 @@ function getGrams() {
 // ==============================
 function showToast(message) {
   const toast = document.getElementById("toast");
+  toast.textContent = message;
+  toast.classList.add("show");
+  setTimeout(() => toast.classList.remove("show"), 2500);
+}
+// ==============================
+// TDEE LIVE PREVIEW
+// ==============================
+function previewTDEE() {
+  const gender = document.getElementById("goalGender").value;
+  const age = parseFloat(document.getElementById("goalAge").value);
+  const height = parseFloat(document.getElementById("goalHeight").value);
+  const weight = parseFloat(document.getElementById("goalWeight").value);
+  const activityLevel = parseFloat(
+    document.getElementById("goalActivity").value,
+  );
+
+  if (!age || !height || !weight) {
+    document.getElementById("tdeePreview").style.display = "none";
+    return;
+  }
+
+  let bmr;
+  if (gender === "male") {
+    bmr = 10 * weight + 6.25 * height - 5 * age + 5;
+  } else {
+    bmr = 10 * weight + 6.25 * height - 5 * age - 161;
+  }
+
+  const tdee = Math.round(bmr * activityLevel);
+  const target =
+    selectedGoalType === "bulk"
+      ? tdee + 300
+      : selectedGoalType === "cut"
+        ? tdee - 400
+        : tdee;
+  const protein = Math.round(
+    weight *
+      (selectedGoalType === "cut"
+        ? 2.2
+        : selectedGoalType === "bulk"
+          ? 2.0
+          : 1.8),
+  );
+
+  document.getElementById("tdeeValue").textContent =
+    `${tdee.toLocaleString()} kcal`;
+  document.getElementById("targetValue").textContent =
+    `${target.toLocaleString()} kcal`;
+  document.getElementById("proteinTargetValue").textContent = `${protein}g`;
+  document.getElementById("tdeePreview").style.display = "flex";
+}
+
+// ==============================
+// PERSONALISED GREETING
+// ==============================
+function showGreeting() {
+  if (!userGoals || !userGoals.name) return;
+
+  const hour = new Date().getHours();
+  const greeting =
+    hour < 12 ? "Good morning" : hour < 17 ? "Good afternoon" : "Good evening";
+
+  const logoP = document.querySelector(".logo p");
+  if (logoP) logoP.textContent = `${greeting}, ${userGoals.name}! 💪🏾`;
+}
+// ==============================
+// TOAST NOTIFICATION
+// ==============================
+function showToast(message) {
+  const toast = document.getElementById("toast");
+  if (!toast) return;
+  toast.textContent = message;
+  toast.classList.add("show");
+  setTimeout(() => toast.classList.remove("show"), 2500);
+}
+
+// ==============================
+// TDEE LIVE PREVIEW
+// ==============================
+function previewTDEE() {
+  const gender = document.getElementById("goalGender").value;
+  const age = parseFloat(document.getElementById("goalAge").value);
+  const height = parseFloat(document.getElementById("goalHeight").value);
+  const weight = parseFloat(document.getElementById("goalWeight").value);
+  const activityLevel = parseFloat(
+    document.getElementById("goalActivity").value,
+  );
+
+  if (!age || !height || !weight) {
+    document.getElementById("tdeePreview").style.display = "none";
+    return;
+  }
+
+  let bmr;
+  if (gender === "male") {
+    bmr = 10 * weight + 6.25 * height - 5 * age + 5;
+  } else {
+    bmr = 10 * weight + 6.25 * height - 5 * age - 161;
+  }
+
+  const tdee = Math.round(bmr * activityLevel);
+  const target =
+    selectedGoalType === "bulk"
+      ? tdee + 300
+      : selectedGoalType === "cut"
+        ? tdee - 400
+        : tdee;
+  const protein = Math.round(
+    weight *
+      (selectedGoalType === "cut"
+        ? 2.2
+        : selectedGoalType === "bulk"
+          ? 2.0
+          : 1.8),
+  );
+
+  document.getElementById("tdeeValue").textContent =
+    `${tdee.toLocaleString()} kcal`;
+  document.getElementById("targetValue").textContent =
+    `${target.toLocaleString()} kcal`;
+  document.getElementById("proteinTargetValue").textContent = `${protein}g`;
+  document.getElementById("tdeePreview").style.display = "flex";
+}
+
+// ==============================
+// PERSONALISED GREETING
+// ==============================
+function showGreeting() {
+  if (!userGoals || !userGoals.name) return;
+
+  const hour = new Date().getHours();
+  const greeting =
+    hour < 12 ? "Good morning" : hour < 17 ? "Good afternoon" : "Good evening";
+
+  const logoP = document.querySelector(".logo p");
+  if (logoP) logoP.textContent = `${greeting}, ${userGoals.name}! 💪🏾`;
+}
+// ==============================
+// TOAST NOTIFICATION
+// ==============================
+function showToast(message) {
+  const toast = document.getElementById("toast");
+  if (!toast) return;
   toast.textContent = message;
   toast.classList.add("show");
   setTimeout(() => toast.classList.remove("show"), 2500);

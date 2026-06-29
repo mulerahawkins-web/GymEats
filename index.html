@@ -8,7 +8,7 @@
   </head>
   <body>
     <header>
-      <di class="header-content">
+      <div class="header-content">
         <div class="logo">
           <span class="logo-icon">💪🏾</span>
           <div>
@@ -18,10 +18,14 @@
         </div>
         <div class="header-right">
           <div class="date-display" id="dateDisplay"></div>
-          <button class="settings-btn" onclick="openGoalSetup()">⚙️ Goals</button>
-<div class="theme-switch" id="themeToggle" onclick="toggleDarkMode()">
-    <div class="switch-thumb"></div>
-</div>
+          <button class="settings-btn" onclick="openGoalSetup()">
+            ⚙️ Goals
+          </button>
+          <div class="theme-switch" id="themeToggle" onclick="toggleDarkMode()">
+            <div class="switch-thumb"></div>
+          </div>
+        </div>
+      </div>
     </header>
 
     <!-- Goal Setup Modal -->
@@ -33,11 +37,49 @@
       <div class="modal">
         <h2>⚙️ Set Your Goals</h2>
         <p class="modal-subtitle">
-          We'll calculate your daily macro targets automatically
+          We'll calculate your daily macro targets using the Mifflin-St Jeor
+          formula
         </p>
 
+        <div class="modal-row">
+          <div class="input-group">
+            <label>Your Name</label>
+            <input type="text" id="goalName" placeholder="e.g. Hawkins" />
+          </div>
+          <div class="input-group">
+            <label>Gender</label>
+            <select id="goalGender">
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="modal-row">
+          <div class="input-group">
+            <label>Age (years)</label>
+            <input
+              type="number"
+              id="goalAge"
+              placeholder="e.g. 25"
+              min="10"
+              max="100"
+            />
+          </div>
+          <div class="input-group">
+            <label>Height (cm)</label>
+            <input
+              type="number"
+              id="goalHeight"
+              placeholder="e.g. 175"
+              min="100"
+              max="250"
+            />
+          </div>
+        </div>
+
         <div class="input-group">
-          <label>Your Body Weight (kg)</label>
+          <label>Body Weight (kg)</label>
           <input
             type="number"
             id="goalWeight"
@@ -86,7 +128,25 @@
               Moderately Active (3–5 days/week)
             </option>
             <option value="1.725">Very Active (6–7 days/week)</option>
+            <option value="1.9">
+              Extremely Active (physical job + training)
+            </option>
           </select>
+        </div>
+
+        <div class="tdee-preview" id="tdeePreview" style="display: none">
+          <div class="tdee-row">
+            <span>Estimated TDEE</span>
+            <span class="tdee-value" id="tdeeValue">0 kcal</span>
+          </div>
+          <div class="tdee-row">
+            <span>Daily Calorie Target</span>
+            <span class="tdee-value" id="targetValue">0 kcal</span>
+          </div>
+          <div class="tdee-row">
+            <span>Daily Protein Target</span>
+            <span class="tdee-value" id="proteinTargetValue">0g</span>
+          </div>
         </div>
 
         <button class="save-goals-btn" onclick="saveGoals()">
@@ -187,23 +247,29 @@
       <section class="search-section card">
         <h2>🍽️ Add Food</h2>
         <div class="search-row">
-        <div class="input-group search-input-wrap">
-          <label>Search Kenyan Food</label>
-          <input
-            type="text"
-            id="foodSearch"
-            placeholder="e.g. Eggs, Chicken, Ugali..."
-            autocomplete="off"
-          />
-          <div class="dropdown" id="dropdown"></div>
+          <div class="input-group search-input-wrap">
+            <label>Search Kenyan Food</label>
+            <input
+              type="text"
+              id="foodSearch"
+              placeholder="e.g. Eggs, Chicken, Ugali..."
+              autocomplete="off"
+            />
+            <div class="dropdown" id="dropdown"></div>
+          </div>
+          <div class="input-group grams-wrap">
+            <label>Amount (g)</label>
+            <div class="smart-amount-row">
+              <input
+                type="number"
+                id="servingSize"
+                placeholder="e.g. 200"
+                min="1"
+              />
+            </div>
+            <small class="gram-hint" id="gramHint"></small>
+          </div>
         </div>
-        <div class="input-group grams-wrap">
-    <label>Amount (g)</label>
-   <div class="smart-amount-row">
-    <input type="number" id="servingSize" placeholder="e.g. 200" min="1">
-</div>
-    <small class="gram-hint" id="gramHint"></small>
-</div>
         <div class="input-group">
           <label>Meal</label>
           <select id="mealTime">
@@ -262,6 +328,7 @@
           </p>
         </div>
       </section>
+
       <div class="toast" id="toast"></div>
     </main>
 
