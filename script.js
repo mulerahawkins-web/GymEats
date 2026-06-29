@@ -912,7 +912,12 @@ function saveGoals() {
 
   document.getElementById("setupNotice").style.display = "none";
   document.getElementById("progressSection").style.display = "block";
+  // Pop the goal badge
+  const badge = document.getElementById("goalBadge");
+  badge.classList.add("pop");
+  setTimeout(() => badge.classList.remove("pop"), 400);
 
+  showToast("💪🏾 Goals saved!");
   closeGoalSetup();
 }
 
@@ -1056,6 +1061,11 @@ function addFood() {
     alert("Please select a food from the list!");
     return;
   }
+
+  // Pulse the button
+  const btn = document.getElementById("addBtn");
+  btn.classList.add("clicked");
+  setTimeout(() => btn.classList.remove("clicked"), 200);
   const grams = getGrams();
   if (!grams) {
     alert("Please enter a valid amount!");
@@ -1081,6 +1091,7 @@ function addFood() {
   saveToStorage();
   renderLog();
   updateTotals();
+  showToast(`✅ ${selectedFood.name} added!`);
 
   document.getElementById("foodSearch").value = "";
   document.getElementById("servingSize").value = "";
@@ -1161,10 +1172,22 @@ function renderLog() {
 // REMOVE & CLEAR
 // ==============================
 function removeEntry(id) {
-  dailyLog = dailyLog.filter((e) => e.id !== id);
-  saveToStorage();
-  renderLog();
-  updateTotals();
+  // Animate out first then remove
+  const el = document.getElementById(`entry-${id}`);
+  if (el) {
+    el.classList.add("removing");
+    setTimeout(() => {
+      dailyLog = dailyLog.filter((e) => e.id !== id);
+      saveToStorage();
+      renderLog();
+      updateTotals();
+    }, 280);
+  } else {
+    dailyLog = dailyLog.filter((e) => e.id !== id);
+    saveToStorage();
+    renderLog();
+    updateTotals();
+  }
 }
 
 function clearLog() {
@@ -1270,4 +1293,13 @@ function getGrams() {
   const val = parseFloat(document.getElementById("servingSize").value);
   if (!val || val <= 0) return null;
   return val;
+}
+// ==============================
+// TOAST NOTIFICATION
+// ==============================
+function showToast(message) {
+  const toast = document.getElementById("toast");
+  toast.textContent = message;
+  toast.classList.add("show");
+  setTimeout(() => toast.classList.remove("show"), 2500);
 }

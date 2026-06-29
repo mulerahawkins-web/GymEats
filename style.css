@@ -1069,3 +1069,212 @@ footer {
 [data-theme="dark"] .meal-group-title {
   border-color: #1e293b;
 }
+/* ==============================
+   ANIMATIONS & TRANSITIONS
+   ============================== */
+
+/* ── Page Load Fade In ── */
+@keyframes fadeInPage {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+main {
+  animation: fadeInPage 0.5s ease forwards;
+}
+
+/* ── Cards Fade In ── */
+@keyframes fadeInCard {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card {
+  animation: fadeInCard 0.4s ease forwards;
+}
+
+/* ── Log Items Slide In ── */
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.log-item {
+  animation: slideInLeft 0.3s ease forwards;
+}
+
+/* ── Nutrient Preview Fade In ── */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#nutrientPreview {
+  animation: fadeIn 0.3s ease forwards;
+}
+
+/* ── Dropdown Fade In ── */
+.dropdown.active {
+  animation: fadeIn 0.2s ease forwards;
+}
+
+/* ── Add Button Pulse on Click ── */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.96);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+#addBtn.clicked {
+  animation: pulse 0.2s ease forwards;
+}
+
+/* ── Progress Bar Fill Animation ── */
+@keyframes fillBar {
+  from {
+    width: 0%;
+  }
+}
+
+.progress-bar {
+  animation: fillBar 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* ── Nutrient Box Pop In ── */
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  70% {
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.nutrient-box {
+  animation: popIn 0.35s ease forwards;
+}
+
+.nutrient-box:nth-child(1) {
+  animation-delay: 0.05s;
+}
+.nutrient-box:nth-child(2) {
+  animation-delay: 0.1s;
+}
+.nutrient-box:nth-child(3) {
+  animation-delay: 0.15s;
+}
+.nutrient-box:nth-child(4) {
+  animation-delay: 0.2s;
+}
+.nutrient-box:nth-child(5) {
+  animation-delay: 0.25s;
+}
+
+/* ── Toast Notification ── */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(80px);
+  background: var(--primary);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  z-index: 999;
+  opacity: 0;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+[data-theme="dark"] .toast {
+  background: var(--accent);
+  color: var(--primary);
+}
+
+/* ── Remove Button Spin on Click ── */
+@keyframes spinOut {
+  from {
+    transform: rotate(0deg) scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: rotate(90deg) scale(0);
+    opacity: 0;
+  }
+}
+
+.log-item.removing {
+  animation: slideOutRight 0.3s ease forwards;
+}
+
+@keyframes slideOutRight {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+}
+
+/* ── Goal Badge Pulse on Save ── */
+@keyframes badgePop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.goal-badge.pop {
+  animation: badgePop 0.4s ease forwards;
+}
