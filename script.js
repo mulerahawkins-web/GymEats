@@ -891,15 +891,7 @@ function openGoalSetup() {
     document.getElementById("goalActivity").value =
       userGoals.activityLevel || "1.55";
     selectGoal(userGoals.goalType);
-    previewTDEE();
   }
-
-  // Live preview as user types
-  ["goalAge", "goalHeight", "goalWeight", "goalGender", "goalActivity"].forEach(
-    (id) => {
-      document.getElementById(id).addEventListener("input", previewTDEE);
-    },
-  );
 }
 
 function closeGoalSetup() {
@@ -1363,54 +1355,6 @@ function showToast(message) {
   toast.classList.add("show");
   setTimeout(() => toast.classList.remove("show"), 2500);
 }
-// ==============================
-// TDEE LIVE PREVIEW
-// ==============================
-function previewTDEE() {
-  const gender = document.getElementById("goalGender").value;
-  const age = parseFloat(document.getElementById("goalAge").value);
-  const height = parseFloat(document.getElementById("goalHeight").value);
-  const weight = parseFloat(document.getElementById("goalWeight").value);
-  const activityLevel = parseFloat(
-    document.getElementById("goalActivity").value,
-  );
-
-  if (!age || !height || !weight) {
-    document.getElementById("tdeePreview").style.display = "none";
-    return;
-  }
-
-  let bmr;
-  if (gender === "male") {
-    bmr = 10 * weight + 6.25 * height - 5 * age + 5;
-  } else {
-    bmr = 10 * weight + 6.25 * height - 5 * age - 161;
-  }
-
-  const tdee = Math.round(bmr * activityLevel);
-  const target =
-    selectedGoalType === "bulk"
-      ? tdee + 300
-      : selectedGoalType === "cut"
-        ? tdee - 400
-        : tdee;
-  const protein = Math.round(
-    weight *
-      (selectedGoalType === "cut"
-        ? 2.2
-        : selectedGoalType === "bulk"
-          ? 2.0
-          : 1.8),
-  );
-
-  document.getElementById("tdeeValue").textContent =
-    `${tdee.toLocaleString()} kcal`;
-  document.getElementById("targetValue").textContent =
-    `${target.toLocaleString()} kcal`;
-  document.getElementById("proteinTargetValue").textContent = `${protein}g`;
-  document.getElementById("tdeePreview").style.display = "flex";
-}
-
 // ==============================
 // PERSONALISED GREETING
 // ==============================

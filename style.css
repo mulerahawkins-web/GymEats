@@ -158,6 +158,40 @@ header {
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
   max-height: 90vh;
   overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+/* Seamless scrollbar — Chrome, Edge, Safari */
+.modal::-webkit-scrollbar {
+  width: 6px;
+}
+
+.modal::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.modal::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 50px;
+  transition: background 0.2s;
+}
+
+.modal::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+/* Seamless scrollbar — Firefox */
+.modal {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+[data-theme="dark"] .modal::-webkit-scrollbar-thumb {
+  background: #1e293b;
+}
+
+[data-theme="dark"] .modal {
+  scrollbar-color: #1e293b transparent;
 }
 
 .modal h2 {
@@ -182,25 +216,6 @@ header {
   display: flex;
   flex-direction: column;
   gap: 8px;
-}
-
-.tdee-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.85rem;
-  color: var(--text-light);
-}
-
-.tdee-value {
-  font-weight: 800;
-  color: var(--accent);
-  font-size: 0.95rem;
-}
-
-[data-theme="dark"] .tdee-preview {
-  background: #0d2137;
-  border-color: var(--accent);
 }
 
 /* Greeting in header */
