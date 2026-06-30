@@ -583,6 +583,35 @@ main {
   max-height: 240px;
   overflow-y: auto;
   display: none;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+.dropdown::-webkit-scrollbar {
+  width: 6px;
+}
+
+.dropdown::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.dropdown::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 50px;
+  transition: background 0.2s;
+}
+
+.dropdown::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+[data-theme="dark"] .dropdown::-webkit-scrollbar-thumb {
+  background: #1e293b;
+}
+
+[data-theme="dark"] .dropdown {
+  scrollbar-color: #1e293b transparent;
 }
 
 .dropdown.active {
