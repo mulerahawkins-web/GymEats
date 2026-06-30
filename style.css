@@ -1320,3 +1320,54 @@ main {
 .goal-badge.pop {
   animation: badgePop 0.4s ease forwards;
 }
+/* ===== CATEGORY FILTER CHIPS ===== */
+.category-filters {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  margin-bottom: 14px;
+  scrollbar-width: none;
+}
+
+.category-filters::-webkit-scrollbar {
+  display: none;
+}
+
+.category-chip {
+  flex-shrink: 0;
+  padding: 7px 16px;
+  border-radius: 50px;
+  border: 1.5px solid var(--border);
+  background: #fafafa;
+  color: var(--text-light);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+  white-space: nowrap;
+}
+
+.category-chip:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.category-chip.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: white;
+}
+
+[data-theme="dark"] .category-chip {
+  background: #1a2234;
+  border-color: #1e293b;
+  color: #94a3b8;
+}
+
+[data-theme="dark"] .category-chip.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--primary);
+}

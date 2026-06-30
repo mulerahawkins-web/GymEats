@@ -1,4 +1,3 @@
-// Test branch — practicing Git branching
 // ==============================
 // GYMEATS — KENYAN GYM TRACKER
 // ==============================
@@ -789,6 +788,12 @@ let dailyLog = [];
 let userGoals = null;
 let dailyTargets = null;
 let selectedGoalType = "maintain";
+let selectedCategory = "All";
+
+// Strips the emoji off a category string — "🥚 Eggs" → "Eggs"
+function getCategoryName(cat) {
+  return cat.replace(/^\S+\s/, "");
+}
 
 // ==============================
 // INIT
@@ -828,6 +833,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   loadFromStorage();
   loadSavedTheme();
+  renderCategoryFilters();
 
   if (!userGoals) openGoalSetup();
 });
@@ -1022,18 +1028,28 @@ function handleSearch() {
   selectedFood = null;
   document.getElementById("nutrientPreview").style.display = "none";
 
-  if (!query) {
+  let results = kenyanFoods;
+
+  if (selectedCategory !== "All") {
+    results = results.filter(
+      (f) => getCategoryName(f.category) === selectedCategory,
+    );
+  }
+
+  if (query) {
+    results = results.filter(
+      (f) =>
+        f.name.toLowerCase().includes(query) ||
+        f.category.toLowerCase().includes(query),
+    );
+  }
+
+  if (!query && selectedCategory === "All") {
     dropdown.classList.remove("active");
     return;
   }
 
-  const results = kenyanFoods
-    .filter(
-      (f) =>
-        f.name.toLowerCase().includes(query) ||
-        f.category.toLowerCase().includes(query),
-    )
-    .slice(0, 8);
+  results = results.slice(0, 10);
 
   if (!results.length) {
     dropdown.innerHTML =
@@ -1043,7 +1059,7 @@ function handleSearch() {
   }
 
   dropdown.innerHTML = results
-    .map((food, i) => {
+    .map((food) => {
       const idx = kenyanFoods.indexOf(food);
       return `<div class="dropdown-item" onclick="selectFoodByIndex(${idx})">
             <span>${food.name}</span>
@@ -1450,4 +1466,26 @@ function showToast(message) {
   toast.textContent = message;
   toast.classList.add("show");
   setTimeout(() => toast.classList.remove("show"), 2500);
+}
+function renderCategoryFilters() {
+  const container = document.getElementById("categoryFilters");
+  const categories = [
+    "All",
+    ...new Set(kenyanFoods.map((f) => getCategoryName(f.category))),
+  ];
+
+  container.innerHTML = categories
+    .map(
+      (cat) => `
+        <button class="category-chip ${cat === selectedCategory ? "active" : ""}"
+                onclick="selectCategory('${cat}')">${cat}</button>
+    `,
+    )
+    .join("");
+}
+
+function selectCategory(cat) {
+  selectedCategory = cat;
+  renderCategoryFilters();
+  handleSearch();
 }
