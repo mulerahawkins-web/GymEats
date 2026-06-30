@@ -834,6 +834,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  loadCustomFoods();
   loadFromStorage();
   loadSavedTheme();
   renderCategoryFilters();
@@ -1492,4 +1493,148 @@ function selectCategory(cat, event) {
   selectedCategory = cat;
   renderCategoryFilters();
   handleSearch();
+}
+// ==============================
+// CUSTOM FOOD ENTRY
+// ==============================
+let customFoods = [];
+let entryMode = "manual";
+
+function loadCustomFoods() {
+  const saved = localStorage.getItem("gymEatsCustomFoods");
+  if (saved) {
+    customFoods = JSON.parse(saved);
+    customFoods.forEach((food) => kenyanFoods.push(food));
+  }
+}
+
+function openCustomFoodModal() {
+  document.getElementById("customFoodOverlay").classList.add("active");
+}
+
+function closeCustomFoodModal() {
+  document.getElementById("customFoodOverlay").classList.remove("active");
+}
+
+function handleCustomFoodOverlayClick(e) {
+  if (e.target === document.getElementById("customFoodOverlay")) {
+    closeCustomFoodModal();
+  }
+}
+
+function selectEntryMode(mode) {
+  entryMode = mode;
+  document
+    .querySelectorAll(".entry-mode-btn")
+    .forEach((btn) =>
+      btn.classList.toggle("active", btn.dataset.mode === mode),
+    );
+  document.getElementById("estimateAction").style.display =
+    mode === "estimate" ? "block" : "none";
+  document.getElementById("estimateHint").textContent = "";
+}
+
+// Finds similar foods in our database and averages their values
+function estimateNutrients(name) {
+  const query = name.toLowerCase();
+  const words = query.split(/\s+/).filter((w) => w.length > 2);
+
+  let matches = kenyanFoods
+    .filter((f) => f.category !== "✍️ Custom")
+    .map((f) => {
+      const text = (f.name + " " + f.category).toLowerCase();
+      let score = 0;
+      words.forEach((w) => {
+        if (text.includes(w)) score++;
+      });
+      return { food: f, score };
+    })
+    .filter((m) => m.score > 0)
+    .sort((a, b) => b.score - a.score);
+
+  let pool = matches.slice(0, 5).map((m) => m.food);
+  const matchCount = pool.length;
+
+  if (pool.length === 0) {
+    pool = kenyanFoods.filter((f) => f.category !== "✍️ Custom");
+  }
+
+  const avg = (key) =>
+    pool.reduce((sum, f) => sum + f.per100g[key], 0) / pool.length;
+
+  return {
+    calories: Math.round(avg("calories")),
+    protein: parseFloat(avg("protein").toFixed(1)),
+    carbs: parseFloat(avg("carbs").toFixed(1)),
+    fat: parseFloat(avg("fat").toFixed(1)),
+    fiber: parseFloat(avg("fiber").toFixed(1)),
+    matchCount,
+  };
+}
+
+function runEstimate() {
+  const name = document.getElementById("customFoodName").value.trim();
+  if (!name) {
+    alert("Type the food name first!");
+    return;
+  }
+
+  const result = estimateNutrients(name);
+
+  document.getElementById("customCalories").value = result.calories;
+  document.getElementById("customProtein").value = result.protein;
+  document.getElementById("customCarbs").value = result.carbs;
+  document.getElementById("customFat").value = result.fat;
+  document.getElementById("customFiber").value = result.fiber;
+
+  document.getElementById("estimateHint").textContent =
+    result.matchCount > 0
+      ? `💡 Estimated from ${result.matchCount} similar food(s) — adjust if needed!`
+      : `💡 No close match found — used a general database average. Please review!`;
+}
+
+function saveCustomFood() {
+  const name = document.getElementById("customFoodName").value.trim();
+  const calories = parseFloat(document.getElementById("customCalories").value);
+  const protein =
+    parseFloat(document.getElementById("customProtein").value) || 0;
+  const carbs = parseFloat(document.getElementById("customCarbs").value) || 0;
+  const fat = parseFloat(document.getElementById("customFat").value) || 0;
+  const fiber = parseFloat(document.getElementById("customFiber").value) || 0;
+
+  if (!name) {
+    alert("Please enter a food name!");
+    return;
+  }
+  if (isNaN(calories)) {
+    alert("Please enter calories, or use Estimate For Me!");
+    return;
+  }
+
+  const newFood = {
+    name,
+    category: "✍️ Custom",
+    per100g: { calories: Math.round(calories), protein, carbs, fat, fiber },
+  };
+
+  customFoods.push(newFood);
+  kenyanFoods.push(newFood);
+  localStorage.setItem("gymEatsCustomFoods", JSON.stringify(customFoods));
+
+  renderCategoryFilters();
+  closeCustomFoodModal();
+  showToast(`✅ ${name} added to your foods!`);
+
+  // Reset form
+  document.getElementById("customFoodName").value = "";
+  [
+    "customCalories",
+    "customProtein",
+    "customCarbs",
+    "customFat",
+    "customFiber",
+  ].forEach((id) => {
+    document.getElementById(id).value = "";
+  });
+  selectEntryMode("manual");
 }

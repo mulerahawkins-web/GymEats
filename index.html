@@ -267,7 +267,61 @@
             <option value="Snack">🍎 Snack</option>
           </select>
         </div>
-        <button id="addBtn" onclick="addFood()">+ Add to Today's Log</button>
+      <button class="custom-food-link" onclick="openCustomFoodModal()">Can't find it? + Add custom food</button>
+            <button id="addBtn" onclick="addFood()">+ Add to Today's Log</button>
+        </section>
+
+        <!-- Custom Food Modal -->
+        <div class="modal-overlay" id="customFoodOverlay" onclick="handleCustomFoodOverlayClick(event)">
+            <div class="modal">
+                <h2>✍️ Add Custom Food</h2>
+                <p class="modal-subtitle">Add any food not in our Kenyan food database</p>
+
+                <div class="input-group">
+                    <label>Food Name</label>
+                    <input type="text" id="customFoodName" placeholder="e.g. Mum's Beef Stew">
+                </div>
+
+                <div class="input-group">
+                    <label>Nutrient Values</label>
+                    <div class="entry-mode-toggle">
+                        <button class="entry-mode-btn active" data-mode="manual" onclick="selectEntryMode('manual')">✏️ I Know The Values</button>
+                        <button class="entry-mode-btn" data-mode="estimate" onclick="selectEntryMode('estimate')">🔍 Estimate For Me</button>
+                    </div>
+                </div>
+
+                <div class="estimate-action" id="estimateAction" style="display:none;">
+                    <button class="estimate-btn" onclick="runEstimate()">🔍 Estimate Nutrients</button>
+                    <p class="estimate-hint" id="estimateHint"></p>
+                </div>
+
+                <p class="per-100-note">Values per 100g serving</p>
+                <div class="custom-nutrient-grid">
+                    <div class="input-group">
+                        <label>Calories (kcal)</label>
+                        <input type="number" id="customCalories" placeholder="0" min="0">
+                    </div>
+                    <div class="input-group">
+                        <label>Protein (g)</label>
+                        <input type="number" id="customProtein" placeholder="0" min="0" step="0.1">
+                    </div>
+                    <div class="input-group">
+                        <label>Carbs (g)</label>
+                        <input type="number" id="customCarbs" placeholder="0" min="0" step="0.1">
+                    </div>
+                    <div class="input-group">
+                        <label>Fat (g)</label>
+                        <input type="number" id="customFat" placeholder="0" min="0" step="0.1">
+                    </div>
+                    <div class="input-group">
+                        <label>Fiber (g)</label>
+                        <input type="number" id="customFiber" placeholder="0" min="0" step="0.1">
+                    </div>
+                </div>
+
+                <button class="save-goals-btn" onclick="saveCustomFood()">💾 Save Custom Food</button>
+            </div>
+        </div>
       </section>
 
       <!-- Nutrient Preview -->
