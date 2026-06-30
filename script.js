@@ -826,7 +826,10 @@ document.addEventListener("DOMContentLoaded", () => {
     .addEventListener("input", updatePreview);
 
   document.addEventListener("click", (e) => {
-    if (!e.target.closest(".input-group")) {
+    if (
+      !e.target.closest(".input-group") &&
+      !e.target.closest(".category-filters")
+    ) {
       document.getElementById("dropdown").classList.remove("active");
     }
   });
@@ -1478,13 +1481,14 @@ function renderCategoryFilters() {
     .map(
       (cat) => `
         <button class="category-chip ${cat === selectedCategory ? "active" : ""}"
-                onclick="selectCategory('${cat}')">${cat}</button>
+                onclick="selectCategory('${cat}', event)">${cat}</button>
     `,
     )
     .join("");
 }
 
-function selectCategory(cat) {
+function selectCategory(cat, event) {
+  if (event) event.stopPropagation();
   selectedCategory = cat;
   renderCategoryFilters();
   handleSearch();
