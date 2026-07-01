@@ -838,6 +838,7 @@ document.addEventListener("DOMContentLoaded", () => {
   loadFromStorage();
   loadSavedTheme();
   renderCategoryFilters();
+  registerServiceWorker();
 
   if (!userGoals) openGoalSetup();
 });
@@ -1637,4 +1638,14 @@ function saveCustomFood() {
     document.getElementById(id).value = "";
   });
   selectEntryMode("manual");
+}
+function registerServiceWorker() {
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker
+      .register("./sw.js")
+      .then(() =>
+        console.log("✅ Service worker registered — GymEats can work offline!"),
+      )
+      .catch((err) => console.log("Service worker registration failed:", err));
+  }
 }
