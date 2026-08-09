@@ -1,24 +1,30 @@
 {
-  "name": "GymEats - Gym Nutrition Tracker",
-  "short_name": "GymEats",
-  "description": "Kenyan gym nutrition tracker for hitting your macro goals",
-  "start_url": "./index.html",
-  "display": "standalone",
-  "background_color": "#0d2137",
-  "theme_color": "#0d2137",
-  "orientation": "portrait",
-  "icons": [
-    {
-      "src": "icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
-    }
-  ]
+    "id": "/GymEats/",
+    "name": "GymEats - Gym Nutrition Tracker",
+    "short_name": "GymEats",
+    "description": "Kenyan gym nutrition tracker for hitting your macro goals",
+    "start_url": "/GymEats/index.html",
+    "scope": "/GymEats/",
+    "display": "standalone",
+    "display_override": ["standalone", "minimal-ui"],
+    "background_color": "#0d2137",
+    "theme_color": "#0d2137",
+    "orientation": "portrait",
+    "lang": "en",
+    "dir": "ltr",
+    "categories": ["health", "fitness", "food"],
+    "prefer_related_applications": false,
+    "icons": [
+        { "src": "/GymEats/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+        { "src": "/GymEats/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+    ],
+    "shortcuts": [
+        {
+            "name": "Add Food",
+            "short_name": "Add Food",
+            "description": "Quickly log a food to today's log",
+            "url": "/GymEats/index.html",
+            "icons": [{ "src": "/GymEats/icon-192.png", "sizes": "192x192" }]
+        }
+    ]
 }
