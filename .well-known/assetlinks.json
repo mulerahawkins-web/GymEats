@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "io.github.mulerahawkins_web.twa",
+      "sha256_cert_fingerprints": [
+        "EA:BC:FA:E5:CF:FF:AC:46:ED:D4:3E:58:93:D3:E5:96:C8:4A:B9:E0:F9:7B:A3:D5:1C:08:08:AB:87:60:B4:10"
+      ]
+    }
+  }
+]
