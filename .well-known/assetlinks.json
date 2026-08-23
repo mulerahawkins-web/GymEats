@@ -3,9 +3,9 @@
     "relation": ["delegate_permission/common.handle_all_urls"],
     "target": {
       "namespace": "android_app",
-      "package_name": "io.github.mulerahawkins_web.twa",
+      "package_name": "app.vercel.gym_eats.twa",
       "sha256_cert_fingerprints": [
-        "EA:BC:FA:E5:CF:FF:AC:46:ED:D4:3E:58:93:D3:E5:96:C8:4A:B9:E0:F9:7B:A3:D5:1C:08:08:AB:87:60:B4:10"
+        "3C:88:21:1D:53:07:DF:E0:78:F2:5D:10:61:9C:C3:F9:99:AD:55:3D:01:AD:F3:4B:5B:0E:A8:9C:6F:E9:3B:EC"
       ]
     }
   }
